@@ -42,5 +42,4 @@ Resources:
       Timeout: 60
       Description: A Lambda function that returns a static string.
       Policies:
-        # Give Lambda basic execution Permission to the helloFromLambda
-        - AWSLambdaBasicExecutionRole-fe4372ce-b36a-4b1f-87ba-9d25a752b0dc
+        - arn:aws:iam::598621183242:policy/service-role/AWSLambdaBasicExecutionRole-fe4372ce-b36a-4b1f-87ba-9d25a752b0dc
