@@ -43,4 +43,4 @@ Resources:
       Description: A Lambda function that returns a static string.
       Policies:
         # Give Lambda basic execution Permission to the helloFromLambda
-        - iot-sim-super-api-get-devices-role-f4j1kytw
+        - AWSLambdaBasicExecutionRole-fe4372ce-b36a-4b1f-87ba-9d25a752b0dc
