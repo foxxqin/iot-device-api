@@ -36,11 +36,11 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./
-      Handler: src/handlers/hello-from-lambda.helloFromLambdaHandler
+      Handler: src/handlers/index.handler
       Runtime: nodejs10.x
       MemorySize: 128
       Timeout: 60
       Description: A Lambda function that returns a static string.
       Policies:
         # Give Lambda basic execution Permission to the helloFromLambda
-        - AWSLambdaBasicExecutionRole
+        - iot-sim-super-api-get-devices-role-f4j1kytw
