@@ -41,8 +41,7 @@ Resources:
       MemorySize: 128
       Timeout: 60
       Description: A Lambda function that returns a static string.
-      Policies:
-        - arn:aws:iam::598621183242:policy/service-role/AWSLambdaBasicExecutionRole-fe4372ce-b36a-4b1f-87ba-9d25a752b0dc
+      Role: arn:aws:iam::598621183242:role/service-role/iot-sim-super-api-get-devices-role-f4j1kytw
       Environment:
         Variables:
           DEVICES_TBL: iot-sim-device-widgets
