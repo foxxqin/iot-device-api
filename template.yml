@@ -68,7 +68,5 @@ Resources:
       RouteSettings:
         "GET /path":
           ThrottlingBurstLimit: 500 # overridden in HttpApi Event
-      StageVariables:
-        StageVar: Value
       FailOnWarnings: true
 
