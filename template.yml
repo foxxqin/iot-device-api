@@ -53,7 +53,7 @@ Resources:
           Properties:
             ApiId: !Ref HttpApi
             Method: GET
-            Path: /path
+            Path: /device
             TimeoutInMillis: 15000
             PayloadFormatVersion: "2.0"
             RouteSettings:
