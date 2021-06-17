@@ -22,22 +22,7 @@ exports.handler = async (event, context) => {
     };
 
     try {
-        switch (event.httpMethod) {
-            case 'DELETE':
-                body = await dynamo.delete(JSON.parse(event.body)).promise();
-                break;
-            case 'GET':
-                body = await dynamo.scan({ TableName: process.env.DEVICES_TBL }).promise();
-                break;
-            case 'POST':
-                body = await dynamo.put(JSON.parse(event.body)).promise();
-                break;
-            case 'PUT':
-                body = await dynamo.update(JSON.parse(event.body)).promise();
-                break;
-            default:
-                throw new Error(`Unsupported method "${event.httpMethod}"`);
-        }
+        body = await dynamo.scan({ TableName: process.env.DEVICES_TBL }).promise();
     } catch (err) {
         statusCode = '400';
         body = err.message;
