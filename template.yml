@@ -59,6 +59,31 @@ Resources:
             RouteSettings:
               ThrottlingBurstLimit: 600
   
+  iotUpdateDeviceFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: src/updateHandler/index.handler
+      Runtime: nodejs10.x
+      MemorySize: 128
+      Timeout: 60
+      Description: A Lambda function that update device stage
+      Environment:
+        Variables:
+          DEVICES_TBL: iot-sim-device-widgets
+          SIMULATOR_QUEUE: https://sqs.ap-southeast-1.amazonaws.com/598621183242/iot-device-simulation
+      Events:
+        ExplicitApi: # warning: creates a public endpoint
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref HttpApi
+            Method: PUT
+            Path: /device
+            TimeoutInMillis: 15000
+            PayloadFormatVersion: "2.0"
+            RouteSettings:
+              ThrottlingBurstLimit: 600
+  
   HttpApi:
     Type: AWS::Serverless::HttpApi
     Properties:
@@ -67,6 +92,8 @@ Resources:
         ThrottlingBurstLimit: 200
       RouteSettings:
         "GET /device":
+          ThrottlingBurstLimit: 500 # overridden in HttpApi Event
+        "PUT /device":
           ThrottlingBurstLimit: 500 # overridden in HttpApi Event
       FailOnWarnings: true
 
