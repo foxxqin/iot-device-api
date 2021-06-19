@@ -27,6 +27,12 @@ Parameters:
   StageName:
     Type: String
     Default: Prod
+  DeviceTable:
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: iot-device-api-device-table
+  SimulatorQueue:
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: iot-device-api-simulator-queue
 
 # Resources declares the AWS resources that you want to include in the stack
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
@@ -46,7 +52,10 @@ Resources:
       Description: A Lambda function that returns a static string.
       Environment:
         Variables:
-          DEVICES_TBL: iot-sim-device-widgets
+          DEVICES_TBL: !Ref DeviceTable
+      Policies: 
+        - DynamoDBReadPolicy:
+            TableName: !Ref DeviceTable
       Events:
         ExplicitApi: # warning: creates a public endpoint
           Type: HttpApi
@@ -70,8 +79,13 @@ Resources:
       Description: A Lambda function that update device stage
       Environment:
         Variables:
-          DEVICES_TBL: iot-sim-device-widgets
-          SIMULATOR_QUEUE: https://sqs.ap-southeast-1.amazonaws.com/598621183242/iot-device-simulation
+          DEVICES_TBL: !Ref DeviceTable
+          SIMULATOR_QUEUE: !Ref SimulatorQueue
+      Policies: 
+        - DynamoDBCrudPolicy:
+            TableName: !Ref DeviceTable
+        - SQSSendMessagePolicy:
+            QueueName: !Ref SimulatorQueue
       Events:
         ExplicitApi: # warning: creates a public endpoint
           Type: HttpApi
