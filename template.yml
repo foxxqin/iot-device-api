@@ -82,10 +82,11 @@ Resources:
           DEVICES_TBL: !Ref DeviceTable
           SIMULATOR_QUEUE: !Ref SimulatorQueue
       Policies: 
-        - DynamoDBCrudPolicy:
-            TableName: !Ref DeviceTable
         - SQSSendMessagePolicy:
             QueueName: !Ref SimulatorQueue
+        - DynamoDBCrudPolicy:
+            TableName: !Ref DeviceTable
+        
       Events:
         ExplicitApi: # warning: creates a public endpoint
           Type: HttpApi
