@@ -53,8 +53,6 @@ Resources:
       Environment:
         Variables:
           DEVICES_TBL: !Ref DeviceTable
-          NEW_DEVICES_TBL: !Ref DeviceTable
-          QUEUE: !Ref SimulatorQueue
       Policies: 
         - DynamoDBReadPolicy:
             TableName: !Ref DeviceTable
