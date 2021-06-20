@@ -85,8 +85,8 @@ Resources:
           DEVICES_TBL: !Ref DeviceTable
           SIMULATOR_QUEUE: !Ref SimulatorQueue
       Policies: 
-        - SQSSendMessagePolicy:
-            QueueName: !Ref SimulatorQueueName
+        # - SQSSendMessagePolicy:
+        #     QueueName: !Ref SimulatorQueueName
         - DynamoDBCrudPolicy:
             TableName: !Ref DeviceTable
         
