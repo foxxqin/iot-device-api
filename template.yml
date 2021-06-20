@@ -33,6 +33,9 @@ Parameters:
   SimulatorQueue:
     Type: AWS::SSM::Parameter::Value<String>
     Default: iot-device-api-simulator-queue
+  SimulatorQueueName:
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: iot-device-api-simulator-queue-name
 
 # Resources declares the AWS resources that you want to include in the stack
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
@@ -83,7 +86,7 @@ Resources:
           SIMULATOR_QUEUE: !Ref SimulatorQueue
       Policies: 
         - SQSSendMessagePolicy:
-            QueueName: !Ref SimulatorQueue
+            QueueName: !Ref SimulatorQueueName
         - DynamoDBCrudPolicy:
             TableName: !Ref DeviceTable
         
