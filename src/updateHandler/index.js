@@ -33,6 +33,7 @@ exports.handler = async (event, context) => {
             }
         };
 
+        //check if the device exists and the status matches
         const device = await dynamo.get(dbGetParams).promise();
 
         if (device != null) {
@@ -48,6 +49,8 @@ exports.handler = async (event, context) => {
 
             console.log(device);
             console.log(valid);
+
+            //2 steps - insert queue and update dynamodb
 
             if (valid === true) {
                 let sqsBody = {
